@@ -201,18 +201,15 @@ test('i32.sub', () => {
 
 
 i32.mul = binop(0x6c, 'i32.mul', (c1, c2) => c1 * c2);
-
+i32.div_s = binop(0x6d, 'i32.div_s', (c1, c2) => Math.trunc(c1 / c2));
 
 test('i32.mul', () => {
   checkBinop(42, 23, i32.mul, 42 * 23);
 });
 
-
-i32.div_s = binop(0x6d, 'i32.div_s', (c1, c2) => Math.trunc(c1 / c2));
-
-
 test('i32.div_s', () => {
   checkBinop(42, 23, i32.div_s, Math.trunc(42 / 23));
+  checkBinop(2, -3, i32.div_s, Math.trunc(2 / -3));
 });
 
 
@@ -231,15 +228,16 @@ test('i32.eq', () => {
 
 
 i32.ne = relop(0x47, 'i32.ne', (c1, c2) => c1 !== c2);
+i32.lt_s = relop(0x48, 'i32.lt_s', (c1, c2) => c1 < c2);
+i32.gt_s = relop(0x4a, 'i32.gt_s', (c1, c2) => c1 > c2);
+i32.le_s = relop(0x4c, 'i32.le_s', (c1, c2) => c1 <= c2);
+i32.ge_s = relop(0x4e, 'i32.ge_s', (c1, c2) => c1 >= c2);
 
 
 test('i32.ne', () => {
   checkBinop(42, 23, i32.ne, 1);
   checkBinop(23, 23, i32.ne, 0);
 });
-
-
-i32.lt_s = relop(0x48, 'i32.lt_s', (c1, c2) => c1 < c2);
 
 
 test('i32.lt_s', () => {
@@ -249,9 +247,6 @@ test('i32.lt_s', () => {
 });
 
 
-i32.gt_s = relop(0x4a, 'i32.gt_s', (c1, c2) => c1 > c2);
-
-
 test('i32.gt_s', () => {
   checkBinop(24, 23, i32.gt_s, 1);
   checkBinop(23, 23, i32.gt_s, 0);
@@ -259,17 +254,11 @@ test('i32.gt_s', () => {
 });
 
 
-i32.le_s = relop(0x4c, 'i32.le_s', (c1, c2) => c1 <= c2);
-
-
 test('i32.le_s', () => {
   checkBinop(24, 23, i32.le_s, 0);
   checkBinop(23, 23, i32.le_s, 1);
   checkBinop(23, 24, i32.le_s, 1);
 });
-
-
-i32.ge_s = relop(0x4e, 'i32.ge_s', (c1, c2) => c1 >= c2);
 
 
 test('i32.ge_s', () => {
