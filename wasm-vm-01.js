@@ -288,4 +288,4 @@ test('complex expression works', () => {
 });
 
 
-export {I32, drop, i32, instr, nop, Stack, VM};
+export {I32, drop, i32, instr, instrImm, nop, Stack, VM};
